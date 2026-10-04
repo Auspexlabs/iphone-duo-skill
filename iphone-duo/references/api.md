@@ -54,7 +54,8 @@ the window size (long side > 800 pt = inner display), as the sample does.
 | `ArrangementViewStyle` protocol, `ArrangementViewStyleConfiguration.primary/.secondary` | SwiftUICore | declared | Custom styles. |
 | `UIArrangementViewController`, `UIArrangement`, `UISplitArrangement` (+ `UISplitArrangementDimension`, `…DimensionRange`, `…ViewProperties`), `UIOverlayArrangement` (+ `…ViewProperties`), `UIArrangementViewState`, `UIViewController.arrangementViewController` | UIKit | declared | UIKit twin: `setViewController(_:forPlacement:)` with `.primary` / `.secondary`, `updateArrangement(_:animated:)`. |
 
-What we measured on the iPhone Duo simulator with `ArrangementView(primary: Main, secondary: Fold)`:
+What we measured on the iPhone Duo simulator with `ArrangementView(primary: Main, secondary: Fold)` (screens:
+`docs/images/arrangementview-styles.png`):
 
 | Style | Folded (cover) | Unfolded (inner, landscape) |
 |---|---|---|

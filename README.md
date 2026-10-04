@@ -31,31 +31,32 @@ use `ArrangementView`), orientation and folding without a flash, and how to veri
 
 ## Screenshots
 
-All taken on the iPhone Duo simulator (iOS 27.1) from the sample and lab apps in this repository.
+All taken on the iPhone Duo simulator (iOS 27.1) from the sample app in this repository.
 
-| Cover: Main alone | Unfolded, the unfold pose (both arrangements look the same here): Fold left, Main right beside the Bar |
+| Cover: Main alone | Cover, running: Lap in the Bar, Pause + Stop pinned at the bottom |
 |---|---|
-| ![cover](docs/images/cover-main.png) | ![unfold pose](docs/images/inner-unfold-pose.png) |
+| ![cover](docs/images/cover-main.png) | ![cover running](docs/images/cover-running.png) |
 
-| 固定式 fixed, phone turned 180°: Main stays on its glass (now on the left) | 混合式 joined, phone turned 180°: Main stays beside the Bar (other glass) |
+Unfolded, in the unfold pose (both arrangements look the same here): Fold on the left, Main on the right beside the Bar.
+
+![unfold pose](docs/images/inner-unfold-pose.png)
+
+| 固定式 fixed, phone turned 180°: Main stays on its glass (now on the left) | 混合式 joined, phone turned 180°: Main stays beside the Bar (the other glass) |
 |---|---|
 | ![fixed 180](docs/images/inner-fixed-turned-180.png) | ![joined 180](docs/images/inner-joined-turned-180.png) |
 
-| Running: Lap in the Bar, Pause + Stop pinned at the bottom | The Start button sliding into the Bar and becoming Stop (video frames) |
+Unfolded, running:
+
+![running](docs/images/inner-running.png)
+
+The Start button sliding into the Bar and becoming Stop (video frames, left to right, top to bottom):
+
+![slide](docs/images/start-slides-into-bar.png)
+
+The Bar with different toolbar constructs (`references/bar.md`): grouping and pinning · button styles · content kinds · placements · a tab bar. And square buttons: default, `.bordered` with a rounded shape (inside the bubble), custom solid, custom glass.
+
+| ![bar gallery](docs/images/bar-gallery.png) | ![square](docs/images/bar-square-buttons.png) |
 |---|---|
-| ![running](docs/images/inner-running.png) | ![slide](docs/images/start-slides-into-bar.png) |
-
-**Why "fixed" is called fixed** — the display's native frames (`recordVideo -noautorotate`) through four poses: Main (blue) never leaves the top panel, Fold (orange) never leaves the bottom one; only the content turns.
-
-![physical frames](docs/images/fixed-physical-frames.png)
-
-**The Bar gallery** (`example/DuoLab -bar1 … -bar8`) behind `references/bar.md`: grouping, styles, content kinds, overflow, placements, axis behavior + search, tab bar — and square buttons.
-
-![bar gallery](docs/images/bar-gallery.png)
-
-| Square buttons: default · `.bordered` + rounded shape (inside the bubble) · custom solid · custom glass | Apple's `ArrangementView` styles with Main as primary: the primary always lands leading, `.overlay` never shows the secondary |
-|---|---|
-| ![square](docs/images/bar-square-buttons.png) | ![arrangementview](docs/images/arrangementview-styles.png) |
 
 ## Install
 
@@ -100,31 +101,32 @@ Copy the `iphone-duo` folder into your agent's skills directory (`~/.claude/skil
 
 ## 截图
 
-全部在 iPhone Duo 模拟器（iOS 27.1）上用本仓库的示例和实验 App 截取。
+全部在 iPhone Duo 模拟器（iOS 27.1）上用本仓库的示例 App 截取。
 
-| 封面：只有 Main | 展开（默认姿势，两种排列此时一样）：Fold 在左，Main 贴着 Bar 在右 |
+| 封面：只有 Main | 封面，计时中：Lap 在 Bar 里，暂停 + 停止置底 |
 |---|---|
-| ![cover](docs/images/cover-main.png) | ![unfold pose](docs/images/inner-unfold-pose.png) |
+| ![cover](docs/images/cover-main.png) | ![cover running](docs/images/cover-running.png) |
+
+展开，默认姿势（两种排列此时一样）：Fold 在左，Main 贴着 Bar 在右。
+
+![unfold pose](docs/images/inner-unfold-pose.png)
 
 | 固定式，手机翻 180°：Main 留在原来那块玻璃（现在在左） | 混合式，手机翻 180°：Main 还贴着 Bar（换到另一块玻璃） |
 |---|---|
 | ![fixed 180](docs/images/inner-fixed-turned-180.png) | ![joined 180](docs/images/inner-joined-turned-180.png) |
 
-| 计时中：Lap 在 Bar 里，暂停 + 停止置底 | Start 按钮滑进 Bar 变成停止（录像帧） |
+展开，计时中：
+
+![running](docs/images/inner-running.png)
+
+Start 按钮滑进 Bar 变成停止（录像帧，从左到右、从上到下）：
+
+![slide](docs/images/start-slides-into-bar.png)
+
+竖栏对不同 toolbar 写法的表现（`references/bar.md`）：成组与置底 · 按钮样式 · 内容类型 · placement · 标签栏。以及方形按钮：默认、`.bordered` + 圆角形状（套在气泡里）、自绘实心、自绘玻璃。
+
+| ![bar gallery](docs/images/bar-gallery.png) | ![square](docs/images/bar-square-buttons.png) |
 |---|---|
-| ![running](docs/images/inner-running.png) | ![slide](docs/images/start-slides-into-bar.png) |
-
-**固定式为什么叫固定**——屏幕原生像素帧（`recordVideo -noautorotate`）四个姿势：Main（蓝）始终在上面那块面板，Fold（橙）始终在下面那块，只有内容换向。
-
-![physical frames](docs/images/fixed-physical-frames.png)
-
-**竖栏 gallery**（`example/DuoLab -bar1 … -bar8`），`references/bar.md` 的依据：成组、样式、内容类型、溢出、placement、轴行为 + 搜索、标签栏——以及方形按钮。
-
-![bar gallery](docs/images/bar-gallery.png)
-
-| 方形按钮：默认 · `.bordered` + 圆角形状（套在气泡里）· 自绘实心 · 自绘玻璃 | Apple 的 `ArrangementView` 各样式（Main 为 primary）：primary 永远在 leading，`.overlay` 从不显示 secondary |
-|---|---|
-| ![square](docs/images/bar-square-buttons.png) | ![arrangementview](docs/images/arrangementview-styles.png) |
 
 ## 安装
 

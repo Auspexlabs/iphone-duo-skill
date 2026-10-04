@@ -81,7 +81,8 @@ scripts/record-frames.sh <display-id> <seconds> out/ --launch com.example.App -D
 - The file is the display's **native** buffer (the inner display: 2006 × 2852, portrait) with a
   `rotation=±90` metadata tag. Players and `ffmpeg` auto-rotate it. To see the **physical** frame — which
   panel a pane is on, regardless of how the device is held — extract with `ffmpeg -noautorotate`. That is how
-  the fixed arrangement's orientation table was verified.
+  the fixed arrangement's orientation table was verified (`docs/images/fixed-physical-frames.png`: Main stays
+  on the top panel of the native frame through all four poses).
 - Recording can start while the display is off; frames are black until it turns on.
 
 ## Reading app state without screenshots
