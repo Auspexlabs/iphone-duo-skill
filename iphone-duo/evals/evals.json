@@ -1,0 +1,51 @@
+{
+  "skill_name": "iphone-duo",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "I'm building a voice recorder app for the iPhone Duo in SwiftUI. Create a minimal XcodeGen project (project.yml + Sources) that builds for the iPhone Duo simulator. Requirements: the recording page is the whole app on the cover display; when unfolded, a transcript panel opens on the other panel and the recording page must stay on the same physical panel no matter how the phone is turned (even upside down). Controls (record/stop, home) go in the Duo's side bar. Xcode 27.1 is installed on this Mac (not in /Applications). Build-only check with xcodebuild: do NOT boot, launch or install anything on a simulator. Save the project and a BUILD.md with the exact build command and its result.",
+      "expected_output": "A buildable XcodeGen project using a layout that keeps the recording page in a fixed slot, an orientation table read in viewWillTransition, the hinge split with ignoresSafeArea, cover locked to portrait by screen size, toolbar items with .axisBehavior(.verticalPreferred), gated with #if compiler(>=6.4)/@available(iOS 27.1); BUILD.md shows a successful build with Xcode 27.1.",
+      "files": [],
+      "assertions": [
+        "Project builds with Xcode 27.1 for the iOS Simulator (BUILD.md shows a successful xcodebuild; no simulator was booted or launched)",
+        "Recording page is kept in a stable slot of one layout (a custom Layout or a container where the recording view is always the same child), not swapped between separate folded/unfolded view trees",
+        "Panel placement for the unfolded display is derived from the interface orientation (all four cases: landscapeLeft/landscapeRight/portrait/portraitUpsideDown), i.e. the page is locked to a physical panel",
+        "Orientation is read before layout (viewWillTransition(to:with:) or equivalent), not only from a post-layout observer",
+        "Cover display is restricted to portrait at runtime and the inner display allows all orientations (AppDelegate supportedInterfaceOrientationsFor), decided by screen size not size class",
+        "Toolbar items use .axisBehavior(.verticalPreferred) and persistent controls (home, record/stop) are in the toolbar",
+        "Duo-only code is gated with #if compiler(>=6.4) and @available/if #available(iOS 27.1, *)",
+        "No API that does not exist in the iOS 27.1 SDK is used (e.g. no invented hinge/panel geometry APIs, no toolbarVerticalEdge modifier, no onFoldChange)"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "Make a small SwiftUI reading app for the iPhone Duo: a library list and a reader page. Unfolded, the library should be a sidebar on the left and the reader on the right, and the whole thing should rotate like an iPad app. Folded (cover display) only the reader shows. Bookmark and Home buttons should live in the Duo's vertical bar. It must build with Xcode 27.1 AND still build with Xcode 26 (both are installed; 27.1 is not in /Applications). Use XcodeGen. Build-only: do not boot or launch any simulator. Save the project and a BUILD.md with both build commands and results.",
+      "expected_output": "XcodeGen project with a window-relative two-pane layout (reader in a stable slot), no orientation tracking code, Duo-only code gated with #if compiler(>=6.4) + if #available(iOS 27.1, *), toolbar items with .axisBehavior(.verticalPreferred); BUILD.md shows successful builds with both Xcodes.",
+      "files": [],
+      "assertions": [
+        "Project builds with Xcode 27.1 (BUILD.md shows a successful xcodebuild for the iOS Simulator destination)",
+        "Project also builds with Xcode 26 (BUILD.md shows a second successful xcodebuild with the /Applications Xcode)",
+        "Unfolded layout is window-relative (library leading, reader trailing) with no orientation tracking code (no interfaceOrientation / viewWillTransition logic)",
+        "Folded (compact / cover) shows only the reader; the reader view keeps a stable identity across folded and unfolded (same slot in one container, or a Layout)",
+        "Bookmark and Home are toolbar items with .axisBehavior(.verticalPreferred)",
+        "Duo-only code is gated with #if compiler(>=6.4) plus if #available(iOS 27.1, *) so Xcode 26 builds",
+        "No non-existent API is used"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Two problems with my SwiftUI iPhone app on the iPhone Duo. (1) My toolbar has Home, Share, Delete, Pause, Stop and a Record button; on the Duo they all end up in one blob in the side bar. I want: Home alone at the top; Share + Delete together as one group; Pause + Stop pinned to the bottom, Stop in red; Record as a square red button. (2) The app shows with black bars / letterboxed on the Duo simulator and the layout looks tiny. Write a single Swift file (DuoBar.swift) containing a NavigationStack view with that toolbar, and a NOTES.md explaining the letterbox cause and fix. Verify DuoBar.swift compiles for the iOS 27.1 simulator SDK (Xcode 27.1 is installed on this Mac, not in /Applications); build-only, do not boot a simulator.",
+      "expected_output": "DuoBar.swift uses .axisBehavior(.verticalPreferred), ToolbarSpacer(.fixed) between groups, ToolbarItem(placement: .bottomBar) for Pause/Stop with .tint(.red), a square button via .sharedBackgroundVisibility(.hidden) and a custom shape; NOTES.md says letterboxing = built with an SDK older than iOS 27.1 (375x667 compatibility mode) and the fix is to rebuild with the 27.1 SDK; file compiles.",
+      "files": [],
+      "assertions": [
+        "DuoBar.swift compiles against the iOS 27.1 simulator SDK (BUILD.md shows the command and success)",
+        "Every bar item uses .axisBehavior(.verticalPreferred)",
+        "Home is separated from Share+Delete by ToolbarSpacer(.fixed) (or equivalent explicit group split), and Share+Delete are adjacent items / one ToolbarItemGroup",
+        "Pause and Stop use ToolbarItem(placement: .bottomBar) and Stop uses .tint(.red) (not .foregroundStyle)",
+        "Record is a square: the shared bubble is hidden with .sharedBackgroundVisibility(.hidden) and a custom RoundedRectangle/square background (or glassEffect in a rounded rectangle) is drawn; not just .buttonBorderShape(.roundedRectangle)",
+        "NOTES.md says the letterboxing is compatibility mode from building with an SDK older than iOS 27.1 (375x667 virtual screen) and the fix is to rebuild with Xcode 27.1 / the iOS 27.1 SDK",
+        "NOTES.md does not propose layout changes as the fix for the letterboxing"
+      ]
+    }
+  ]
+}
